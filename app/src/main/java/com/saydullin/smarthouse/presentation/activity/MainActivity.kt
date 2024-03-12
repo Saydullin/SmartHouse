@@ -1,6 +1,7 @@
 package com.saydullin.smarthouse.presentation.activity
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,10 +13,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.saydullin.smarthouse.presentation.screen.AuthenticateScreen
 import com.saydullin.smarthouse.presentation.ui.theme.SmartHouseTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        try {
+            Log.e("sady", "Success")
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Log.e("sady", "Error")
+        }
         setContent {
             SmartHouseTheme {
                 Surface(
