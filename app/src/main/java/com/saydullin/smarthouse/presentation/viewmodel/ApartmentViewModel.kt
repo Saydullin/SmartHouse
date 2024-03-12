@@ -33,6 +33,10 @@ class ApartmentViewModel @Inject constructor(
         }
     }
 
+    fun resetError() {
+        _error.value = null
+    }
+
 }
 
 
