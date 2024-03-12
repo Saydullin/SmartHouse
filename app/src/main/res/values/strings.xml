@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Smart House</string>
+    <string name="auth_server_client_id">469740692970-oqquqfcfduofr24273es4smrta5q2d4k.apps.googleusercontent.com</string>
 </resources>

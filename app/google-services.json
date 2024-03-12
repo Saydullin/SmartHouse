@@ -12,7 +12,20 @@
           "package_name": "com.saydullin.smarthouse"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "469740692970-d2ntcssrmrge1nrj91rtu22r33jasot6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.saydullin.smarthouse",
+            "certificate_hash": "2d3d6d03fa5e7307eefcbe648d1ae4bdba531255"
+          }
+        },
+        {
+          "client_id": "469740692970-oqquqfcfduofr24273es4smrta5q2d4k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAVjO8MVqQ3kUF8WG_Gvrodg0EuDZdvuz0"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "469740692970-oqquqfcfduofr24273es4smrta5q2d4k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
