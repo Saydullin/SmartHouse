@@ -1,41 +1,41 @@
 {
   "project_info": {
-    "project_number": "469740692970",
-    "project_id": "smarthouse-7820d",
-    "storage_bucket": "smarthouse-7820d.appspot.com"
+    "project_number": "904678366358",
+    "project_id": "smarthouse-ff092",
+    "storage_bucket": "smarthouse-ff092.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:469740692970:android:a90dfc6084bde3d798fe93",
+        "mobilesdk_app_id": "1:904678366358:android:d09bedd4aba8743ed2f6b7",
         "android_client_info": {
           "package_name": "com.saydullin.smarthouse"
         }
       },
       "oauth_client": [
         {
-          "client_id": "469740692970-d2ntcssrmrge1nrj91rtu22r33jasot6.apps.googleusercontent.com",
+          "client_id": "904678366358-h5r2h8bt72rbbtlekbr1tu1igcerjcbv.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.saydullin.smarthouse",
-            "certificate_hash": "2d3d6d03fa5e7307eefcbe648d1ae4bdba531255"
+            "certificate_hash": "046f339627b25f6016269c08de6b42407cc97119"
           }
         },
         {
-          "client_id": "469740692970-oqquqfcfduofr24273es4smrta5q2d4k.apps.googleusercontent.com",
+          "client_id": "904678366358-u4ibmalmeakgnkv9arp0nl5shp6t4t5v.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAVjO8MVqQ3kUF8WG_Gvrodg0EuDZdvuz0"
+          "current_key": "AIzaSyDKOKAYF9DUm_XD98zS6a2wIfZ235lI6go"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "469740692970-oqquqfcfduofr24273es4smrta5q2d4k.apps.googleusercontent.com",
+              "client_id": "904678366358-u4ibmalmeakgnkv9arp0nl5shp6t4t5v.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
