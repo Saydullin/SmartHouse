@@ -1,4 +1,4 @@
-package com.saydullin.smarthouse.domain.usecase
+package com.saydullin.smarthouse.domain.usecase.apartment
 
 import com.saydullin.smarthouse.domain.model.Apartment
 import com.saydullin.smarthouse.domain.repository.ApartmentsRepository

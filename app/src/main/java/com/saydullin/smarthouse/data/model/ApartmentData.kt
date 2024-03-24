@@ -13,6 +13,7 @@ data class ApartmentData(
     val isHidden: Boolean,
     val userId: Int,
     val email: String,
+    val reviewId: Int,
     val location: LocationData,
 )
 

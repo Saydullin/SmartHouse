@@ -10,7 +10,7 @@ data class ApartmentEntity(
     val title: String,
     val description: String,
     val previewImage: String,
-    val images: List<Int>,
+    val imagesId: Int,
     val views: Int,
     val likes: Int,
     val publishedDate: Long,
@@ -18,6 +18,7 @@ data class ApartmentEntity(
     val isHidden: Boolean,
     val userId: Int,
     val email: String,
+    val reviewId: Int,
     val location: LocationData,
 )
 

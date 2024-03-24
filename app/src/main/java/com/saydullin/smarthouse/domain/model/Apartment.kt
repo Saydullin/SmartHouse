@@ -13,7 +13,7 @@ data class Apartment @JvmOverloads constructor(
     val publishedDate: Long = 0,
     val isApproved: Boolean = false,
     val isHidden: Boolean = false,
-    val userId: Int = 0,
+    val authorUID: Int = 0,
     val email: String = "",
     var location: GeoPoint = GeoPoint(0.0, 0.0),
 )

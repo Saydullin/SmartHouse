@@ -24,4 +24,10 @@ sealed class Screen(
         icon = 0
     )
 
+    data object ApartmentInfo: Screen(
+        route = "apartment_info",
+        title = "Apartment Info",
+        icon = 0
+    )
+
 }

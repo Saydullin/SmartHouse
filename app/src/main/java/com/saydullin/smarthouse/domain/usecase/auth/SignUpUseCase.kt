@@ -11,7 +11,6 @@ class SignUpUseCase {
 
     suspend fun execute(login: String, pass: String): Resource<Unit> {
         val auth = Firebase.auth
-        if (auth.currentUser != null) return Resource.Success(Unit)
 
         return try {
             val signUp = auth.createUserWithEmailAndPassword(login, pass).await()
@@ -29,3 +28,5 @@ class SignUpUseCase {
         }
     }
 }
+
+

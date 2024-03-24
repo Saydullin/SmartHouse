@@ -29,7 +29,6 @@ class DataModule {
         )
             .allowMainThreadQueries()
             .addTypeConverter(LocationDataConverter())
-            .addTypeConverter(IntListConverter())
             .build()
     }
 

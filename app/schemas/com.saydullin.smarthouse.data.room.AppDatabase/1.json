@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "36a0b58599899ef4703e67d8afb51d36",
+    "identityHash": "876526254171b71f4ba9094db7b9355f",
     "entities": [
       {
         "tableName": "ApartmentEntity",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `title` TEXT NOT NULL, `description` TEXT NOT NULL, `previewImage` TEXT NOT NULL, `images` TEXT NOT NULL, `views` INTEGER NOT NULL, `likes` INTEGER NOT NULL, `publishedDate` INTEGER NOT NULL, `isApproved` INTEGER NOT NULL, `isHidden` INTEGER NOT NULL, `userId` INTEGER NOT NULL, `email` TEXT NOT NULL, `location` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `title` TEXT NOT NULL, `description` TEXT NOT NULL, `previewImage` TEXT NOT NULL, `imagesId` INTEGER NOT NULL, `views` INTEGER NOT NULL, `likes` INTEGER NOT NULL, `publishedDate` INTEGER NOT NULL, `isApproved` INTEGER NOT NULL, `isHidden` INTEGER NOT NULL, `userId` INTEGER NOT NULL, `email` TEXT NOT NULL, `reviewId` INTEGER NOT NULL, `location` TEXT NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -33,9 +33,9 @@
             "notNull": true
           },
           {
-            "fieldPath": "images",
-            "columnName": "images",
-            "affinity": "TEXT",
+            "fieldPath": "imagesId",
+            "columnName": "imagesId",
+            "affinity": "INTEGER",
             "notNull": true
           },
           {
@@ -81,9 +81,97 @@
             "notNull": true
           },
           {
+            "fieldPath": "reviewId",
+            "columnName": "reviewId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
             "fieldPath": "location",
             "columnName": "location",
             "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "ApartmentImagesEntity",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `apartmentId` INTEGER NOT NULL, `src` TEXT NOT NULL, `alt` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "apartmentId",
+            "columnName": "apartmentId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "src",
+            "columnName": "src",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "alt",
+            "columnName": "alt",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "ApartmentReviewEntity",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `rateCount` INTEGER NOT NULL, `description` TEXT NOT NULL, `authorName` TEXT NOT NULL, `date` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "rateCount",
+            "columnName": "rateCount",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "authorName",
+            "columnName": "authorName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "date",
+            "columnName": "date",
+            "affinity": "INTEGER",
             "notNull": true
           }
         ],
@@ -100,7 +188,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '36a0b58599899ef4703e67d8afb51d36')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '876526254171b71f4ba9094db7b9355f')"
     ]
   }
 }

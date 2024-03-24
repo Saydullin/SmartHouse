@@ -18,10 +18,11 @@ import com.saydullin.smarthouse.domain.model.Apartment
 
 @Composable
 fun ApartmentView(
-    apartment: Apartment
+    apartment: Apartment,
+    onClick: () -> Unit
 ) {
 
-    Card(onClick = { /*TODO*/ }) {
+    Card(onClick = { onClick() }) {
         Column {
             Image(
                 painter = rememberAsyncImagePainter(apartment.previewImage),
@@ -50,3 +51,5 @@ fun ApartmentView(
     }
 
 }
+
+
