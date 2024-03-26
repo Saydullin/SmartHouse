@@ -1,6 +1,16 @@
 <resources>
     <string name="app_name">Smart House</string>
     <string name="auth_server_client_id">904678366358-u4ibmalmeakgnkv9arp0nl5shp6t4t5v.apps.googleusercontent.com</string>
+    <string name="error_unknown_error">Неизвестная ошибка</string>
+    <string name="error_server_error">Ошибка сервера</string>
+    <string name="error_connection_error">Ошибка подключения. Проверьте соединение интернета</string>
+    <string name="error_user_disabled">Пользователь был отключен</string>
+    <string name="error_user_not_found">Пользователь не найден</string>
+    <string name="error_invalid_credential">Введены неверные данные</string>
+    <string name="error_invalid_email">Неверный email</string>
+    <string name="error_weak_password">Слишком слабый пароль</string>
+    <string name="error_invalid_user_token">Формат токена неверный</string>
+    <string name="error_user_token_expired">Срок токена истек. Возможно, данные авторизации были изменены на другом устройстве</string>
 </resources>
 
 

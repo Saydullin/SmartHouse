@@ -1,17 +1,10 @@
 package com.saydullin.smarthouse.presentation.screen.navigation
 
-import android.util.Log
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.width
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -22,6 +15,7 @@ import com.saydullin.smarthouse.presentation.screen.apartment.ApartmentInfo
 import com.saydullin.smarthouse.presentation.screen.apartment.ApartmentsScreen
 import com.saydullin.smarthouse.presentation.screen.authenticate.SignInScreen
 import com.saydullin.smarthouse.presentation.screen.authenticate.SignUpScreen
+import com.saydullin.smarthouse.presentation.utils.ErrorMessage
 import com.saydullin.smarthouse.presentation.viewmodel.ApartmentViewModel
 import com.saydullin.smarthouse.presentation.viewmodel.AuthViewModel
 
@@ -32,8 +26,8 @@ fun NavController(
 ) {
 
     val auth = Firebase.auth
+    val authError = authViewModel.error.value
     val isAuthenticated = authViewModel.isAuthenticated.value
-    val loading = authViewModel.loading.value
     val navController = rememberNavController()
 
     LaunchedEffect(Unit) {
@@ -46,7 +40,20 @@ fun NavController(
         }
     }
 
-    Log.e("sady", "User UID ${auth.currentUser?.uid}")
+    if (authError != null) {
+        val errorMessage = ErrorMessage.execute(context = LocalContext.current, e = authError)
+        AlertDialog(
+            onDismissRequest = { authViewModel.resetError() },
+            confirmButton = {  },
+            title = {
+                Text(text = "Error")
+            },
+            text = {
+                Text(text = errorMessage)
+            },
+
+        )
+    }
 
     NavHost(
         navController = navController,
@@ -79,9 +86,12 @@ fun NavController(
     }
 
     if (!isAuthenticated) {
-        navController.navigate(Screen.SignUp.route) {
-            popUpTo(navController.currentDestination?.route ?: Screen.Apartments.route) {
-                inclusive = true
+        val currentRoute = navController.currentDestination?.route ?: ""
+        if (currentRoute != Screen.SignUp.route && currentRoute != Screen.SignIn.route) {
+            navController.navigate(Screen.SignUp.route) {
+                popUpTo(navController.currentDestination?.route ?: Screen.Apartments.route) {
+                    inclusive = true
+                }
             }
         }
     } else {
@@ -89,21 +99,6 @@ fun NavController(
             popUpTo(navController.currentDestination?.route ?: Screen.SignUp.route) {
                 inclusive = true
             }
-            launchSingleTop = true
-        }
-    }
-
-    if (loading) {
-        Box(modifier = Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background),
-            contentAlignment = Alignment.Center,
-        ) {
-            CircularProgressIndicator(
-                modifier = Modifier.width(64.dp),
-                color = MaterialTheme.colorScheme.secondary,
-                trackColor = MaterialTheme.colorScheme.surfaceVariant,
-            )
         }
     }
 

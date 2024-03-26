@@ -1,15 +1,21 @@
 package com.saydullin.smarthouse.presentation.screen.authenticate
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -20,12 +26,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberAsyncImagePainter
 import com.saydullin.smarthouse.presentation.screen.navigation.Screen
+import com.saydullin.smarthouse.presentation.utils.ErrorMessage
 import com.saydullin.smarthouse.presentation.viewmodel.AuthViewModel
 
 @Composable
@@ -34,6 +42,7 @@ fun SignInScreen(
     authViewModel: AuthViewModel = hiltViewModel()
 ) {
 
+    val loading = authViewModel.loading.value
     val login = remember {
         mutableStateOf("")
     }
@@ -57,14 +66,18 @@ fun SignInScreen(
         )
         Spacer(modifier = Modifier.height(40.dp))
         Text(
-            style = MaterialTheme.typography.bodyLarge,
+            style = MaterialTheme.typography.bodyMedium,
             text = "Sign In"
         )
         Spacer(modifier = Modifier.height(50.dp))
         TextField(
+            textStyle = MaterialTheme.typography.titleMedium,
             value = login.value,
             placeholder = {
-                Text(text = "Email")
+                Text(
+                    text = "Email",
+                    style = MaterialTheme.typography.titleMedium,
+                )
             },
             onValueChange = {
                 login.value = it
@@ -72,9 +85,13 @@ fun SignInScreen(
         )
         Spacer(modifier = Modifier.height(20.dp))
         TextField(
+            textStyle = MaterialTheme.typography.titleMedium,
             value = password.value,
             placeholder = {
-                Text(text = "Password")
+                Text(
+                    text = "Password",
+                    style = MaterialTheme.typography.titleMedium,
+                )
             },
             onValueChange = {
                 password.value = it
@@ -82,19 +99,38 @@ fun SignInScreen(
         )
         Spacer(modifier = Modifier.height(50.dp))
         Button(
+            enabled = !loading,
             onClick = {
                 authViewModel.signIn(
-                    login = login.value,
-                    password = password.value
+                    login = login.value.trim(),
+                    password = password.value.trim()
                 )
             }
         ) {
-            Text("Done")
+            Text(
+                text = "Done",
+                style = MaterialTheme.typography.titleMedium,
+            )
+        }
+        if (loading) {
+            Column(modifier = Modifier
+                .fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Spacer(modifier = Modifier.height(20.dp))
+                CircularProgressIndicator(
+                    modifier = Modifier.width(44.dp),
+                    color = MaterialTheme.colorScheme.secondary,
+                    trackColor = MaterialTheme.colorScheme.surfaceVariant,
+                )
+            }
         }
         Spacer(modifier = Modifier.height(50.dp))
         Text(
-            "Not registered yet?"
+            text = "Not registered yet?",
+            style = MaterialTheme.typography.titleMedium,
         )
+        Spacer(modifier = Modifier.height(10.dp))
         Text(
             modifier = Modifier
                 .clickable {
@@ -105,7 +141,8 @@ fun SignInScreen(
                     }
                 },
             text = "Sign Up",
-            color = Color.Blue
+            color = Color.Blue,
+            style = MaterialTheme.typography.titleMedium,
         )
     }
 

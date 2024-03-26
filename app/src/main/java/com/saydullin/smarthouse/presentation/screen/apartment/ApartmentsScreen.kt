@@ -2,11 +2,15 @@ package com.saydullin.smarthouse.presentation.screen.apartment
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -45,6 +49,14 @@ fun ApartmentsScreen(
         verticalArrangement = Arrangement.spacedBy(18.dp),
         contentPadding = PaddingValues(vertical = 18.dp),
     ) {
+        item {
+            Text(
+                modifier = Modifier
+                    .padding(vertical = 18.dp),
+                text = "Apartments",
+                style = MaterialTheme.typography.bodyLarge
+            )
+        }
         items(apartments) { apartment ->
             ApartmentView(
                 apartment = apartment,

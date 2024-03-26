@@ -1,8 +1,6 @@
 package com.saydullin.smarthouse.presentation.screen.authenticate
 
 import android.annotation.SuppressLint
-import android.util.Log
-import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -40,6 +38,7 @@ fun SignUpScreen(
     authViewModel: AuthViewModel = hiltViewModel()
 ) {
 
+    val loading = authViewModel.loading.value
     val login = remember {
         mutableStateOf("")
     }
@@ -63,45 +62,60 @@ fun SignUpScreen(
         )
         Spacer(modifier = Modifier.height(40.dp))
         Text(
-            style = MaterialTheme.typography.bodyLarge,
+            style = MaterialTheme.typography.titleMedium,
             text = "Sign Up"
         )
         Spacer(modifier = Modifier.height(50.dp))
         TextField(
+            textStyle = MaterialTheme.typography.titleMedium,
             value = login.value,
             placeholder = {
-                Text(text = "Email")
+                Text(
+                    text = "Email",
+                    style = MaterialTheme.typography.titleMedium,
+                )
             },
             onValueChange = { login.value = it }
         )
         Spacer(modifier = Modifier.height(20.dp))
         TextField(
+            textStyle = MaterialTheme.typography.titleMedium,
             value = password.value,
             placeholder = {
-                Text(text = "Password")
+                Text(
+                    text = "Password",
+                    style = MaterialTheme.typography.titleMedium,
+                )
             },
             onValueChange = { password.value = it }
         )
         Spacer(modifier = Modifier.height(20.dp))
         TextField(
+            textStyle = MaterialTheme.typography.titleMedium,
             value = "Confirm password",
             onValueChange = {  }
         )
         Spacer(modifier = Modifier.height(50.dp))
         Button(
+            enabled = !loading,
             onClick = {
                 authViewModel.signUp(
-                    login = login.value,
-                    password = password.value
+                    login = login.value.trim(),
+                    password = password.value.trim(),
                 )
             }
         ) {
-            Text("Done")
+            Text(
+                text = "Done",
+                style = MaterialTheme.typography.titleMedium,
+            )
         }
         Spacer(modifier = Modifier.height(50.dp))
         Text(
-            "Signed in already?"
+            text = "Signed in already?",
+            style = MaterialTheme.typography.titleMedium
         )
+        Spacer(modifier = Modifier.height(10.dp))
         Text(
             modifier = Modifier
                 .clickable {
@@ -112,7 +126,8 @@ fun SignUpScreen(
                     }
                 },
             text = "Sign In",
-            color = Color.Blue
+            color = Color.Blue,
+            style = MaterialTheme.typography.titleMedium
         )
     }
 

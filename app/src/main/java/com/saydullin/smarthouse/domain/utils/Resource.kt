@@ -10,6 +10,15 @@ enum class StatusCode {
     SYSTEM_ERROR,
     DATA_ERROR,
     UNKNOWN_ERROR,
+
+    // Auth error codes
+    ERROR_USER_DISABLED,
+    ERROR_USER_NOT_FOUND,
+    ERROR_USER_TOKEN_EXPIRED,
+    ERROR_INVALID_USER_TOKEN,
+    ERROR_INVALID_CREDENTIAL,
+    ERROR_INVALID_EMAIL,
+    ERROR_WEAK_PASSWORD,
 }
 
 sealed class Resource<T>(
@@ -27,3 +36,5 @@ sealed class Resource<T>(
     ): Resource<T>(data, statusCode, message)
 
 }
+
+

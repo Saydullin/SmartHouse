@@ -43,14 +43,6 @@ fun ApartmentInfo(
         return
     }
 
-    apartmentViewModel.saveFavourite(
-        ApartmentFavourite(
-            id = 1,
-            apartmentId = 1,
-            uid = Firebase.auth.currentUser?.uid ?: ""
-        )
-    )
-
     Column {
         Image(
             painter = rememberAsyncImagePainter(apartment.previewImage),
@@ -66,15 +58,20 @@ fun ApartmentInfo(
             Text(
                 text = apartment.title,
                 maxLines = 2,
-                overflow = TextOverflow.Ellipsis
+                overflow = TextOverflow.Ellipsis,
+                style = MaterialTheme.typography.titleMedium,
             )
             Spacer(modifier = Modifier.padding(vertical = 8.dp))
             Text(
                 text = apartment.description,
                 maxLines = 3,
-                overflow = TextOverflow.Ellipsis
+                overflow = TextOverflow.Ellipsis,
+                style = MaterialTheme.typography.labelMedium,
+
             )
         }
     }
 
 }
+
+
