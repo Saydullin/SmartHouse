@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.saydullin.smarthouse.data.model.ApartmentFavourite
 import com.saydullin.smarthouse.domain.model.Apartment
+import com.saydullin.smarthouse.domain.usecase.apartment.AddApartmentUseCase
 import com.saydullin.smarthouse.domain.usecase.apartment.GetApartmentUseCase
 import com.saydullin.smarthouse.domain.usecase.apartment.SaveApartmentFavouriteUseCase
 import com.saydullin.smarthouse.domain.utils.Resource
@@ -18,6 +19,7 @@ import javax.inject.Inject
 class ApartmentViewModel @Inject constructor(
     private val getApartmentUseCase: GetApartmentUseCase,
     private val saveApartmentFavouriteUseCase: SaveApartmentFavouriteUseCase,
+    private val addApartmentUseCase: AddApartmentUseCase,
 ) : ViewModel() {
 
     private val _apartments = mutableStateOf<List<Apartment>?>(null)
@@ -36,9 +38,15 @@ class ApartmentViewModel @Inject constructor(
             val apartmentsRes = getApartmentUseCase.getAllApartments()
             _apartments.value = apartmentsRes.data
 
-            if (apartmentsRes.data != null && apartmentsRes is Resource.Success) {
+            if (apartmentsRes.data == null || apartmentsRes is Resource.Error) {
                 _error.value = apartmentsRes.statusCode
             }
+        }
+    }
+
+    fun addApartment(apartment: Apartment) {
+        viewModelScope.launch(Dispatchers.IO) {
+            addApartmentUseCase.addApartment(apartment)
         }
     }
 

@@ -5,9 +5,11 @@ import androidx.room.Room
 import com.saydullin.smarthouse.data.converter.IntListConverter
 import com.saydullin.smarthouse.data.converter.LocationDataConverter
 import com.saydullin.smarthouse.data.repository.apartments.ApartmentsRepositoryImpl
+import com.saydullin.smarthouse.data.repository.profile.ProfileDataRepositoryImpl
 import com.saydullin.smarthouse.data.room.AppDatabase
 import com.saydullin.smarthouse.data.room.dao.ApartmentDao
 import com.saydullin.smarthouse.domain.repository.ApartmentsRepository
+import com.saydullin.smarthouse.domain.repository.ProfileRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -42,6 +44,12 @@ class DataModule {
     @Singleton
     fun provideApartmentRepository(): ApartmentsRepository {
         return ApartmentsRepositoryImpl()
+    }
+
+    @Provides
+    @Singleton
+    fun provideProfileRepository(): ProfileRepository {
+        return ProfileDataRepositoryImpl()
     }
 
 }

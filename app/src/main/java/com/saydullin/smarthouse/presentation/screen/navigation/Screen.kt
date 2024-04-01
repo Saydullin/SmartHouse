@@ -1,5 +1,7 @@
 package com.saydullin.smarthouse.presentation.screen.navigation
 
+import com.saydullin.smarthouse.R
+
 sealed class Screen(
     val route: String,
     val title: String,
@@ -18,10 +20,22 @@ sealed class Screen(
         icon = 0
     )
 
+    data object AddApartment: Screen(
+        route = "add_apartment",
+        title = "Add Apartment",
+        icon = 0
+    )
+
+    data object Profile: Screen(
+        route = "profile",
+        title = "Profile",
+        icon = R.drawable.profile
+    )
+
     data object Apartments: Screen(
         route = "apartments",
         title = "Apartments",
-        icon = 0
+        icon = R.drawable.home
     )
 
     data object ApartmentInfo: Screen(

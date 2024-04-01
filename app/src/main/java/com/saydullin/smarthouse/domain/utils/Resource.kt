@@ -19,6 +19,8 @@ enum class StatusCode {
     ERROR_INVALID_CREDENTIAL,
     ERROR_INVALID_EMAIL,
     ERROR_WEAK_PASSWORD,
+
+    USER_NOT_AUTHENTICATED,
 }
 
 sealed class Resource<T>(

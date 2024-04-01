@@ -12,6 +12,7 @@ class SignInUseCase {
 
     suspend fun execute(login: String, password: String): Resource<Unit> {
         val auth = Firebase.auth
+
         return try {
             val signInResult = auth.signInWithEmailAndPassword(login, password).await()
             if (signInResult.user != null) {

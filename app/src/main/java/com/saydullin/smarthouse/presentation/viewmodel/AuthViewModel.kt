@@ -1,12 +1,12 @@
 package com.saydullin.smarthouse.presentation.viewmodel
 
-import android.util.Log
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
+import com.saydullin.smarthouse.domain.usecase.auth.DeleteUserUseCase
+import com.saydullin.smarthouse.domain.usecase.auth.LogOutUseCase
 import com.saydullin.smarthouse.domain.usecase.auth.SignInUseCase
 import com.saydullin.smarthouse.domain.usecase.auth.SignUpUseCase
 import com.saydullin.smarthouse.domain.utils.Resource
@@ -20,7 +20,8 @@ import javax.inject.Inject
 class AuthViewModel @Inject constructor(
     private val signUpUseCase: SignUpUseCase,
     private val signInUseCase: SignInUseCase,
-//    private val logOutUseCase: LogOutUseCase,
+    private val logOutUseCase: LogOutUseCase,
+    private val deleteUserUseCase: DeleteUserUseCase,
 ): ViewModel() {
 
     private val _error = mutableStateOf<StatusCode?>(null)
@@ -44,8 +45,28 @@ class AuthViewModel @Inject constructor(
         }
     }
 
-    fun signOut() {
+    fun resetAuth() {
         _isAuthenticated.value = false
+    }
+
+    fun deleteAccount(email: String, pass: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val deleteRes = deleteUserUseCase.execute(email, pass)
+            _isAuthenticated.value = deleteRes !is Resource.Success
+            if (deleteRes is Resource.Error) {
+                _error.value = deleteRes.statusCode
+            }
+        }
+    }
+
+    fun logOut() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val signInResult = logOutUseCase.execute()
+            _isAuthenticated.value = signInResult !is Resource.Success
+            if (signInResult is Resource.Error) {
+                _error.value = signInResult.statusCode
+            }
+        }
     }
 
     fun resetError() {

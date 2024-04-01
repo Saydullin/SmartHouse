@@ -1,22 +1,26 @@
 package com.saydullin.smarthouse.domain.usecase.auth
 
-import android.util.Log
 import com.google.firebase.Firebase
+import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.auth.auth
 import com.saydullin.smarthouse.domain.utils.Resource
 import com.saydullin.smarthouse.domain.utils.StatusCode
+import kotlinx.coroutines.tasks.await
+import javax.inject.Inject
 
-class LogOutUseCase {
+class DeleteUserUseCase @Inject constructor() {
 
-    fun execute(): Resource<Unit> {
-        val auth = Firebase.auth
+    suspend fun execute(email: String, pass: String): Resource<Unit> {
+        val user = Firebase.auth
 
         return try {
-            auth.signOut()
+            val credential = EmailAuthProvider.getCredential(email, pass)
+            user.currentUser?.reauthenticate(credential)?.await()
+            user.currentUser?.delete()?.await()
+
             Resource.Success(Unit)
         } catch (es: FirebaseAuthException) {
-            Log.e("sady", "StatusCode ${es.errorCode}")
             val errorCode = try {
                 StatusCode.valueOf(es.errorCode)
             } catch (e: Exception) {
@@ -26,11 +30,12 @@ class LogOutUseCase {
                 statusCode = errorCode
             )
         } catch (e: Exception) {
-            e.printStackTrace()
             Resource.Error(
-                statusCode = StatusCode.CONNECTION_ERROR
+                statusCode = StatusCode.SERVER_ERROR
             )
         }
     }
 
 }
+
+
