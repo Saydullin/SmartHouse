@@ -9,4 +9,6 @@ interface ProfileRepository {
 
     suspend fun saveUserData(userData: UserData): Resource<Unit>
 
+    suspend fun dropUserData(): Resource<Unit>
+
 }

@@ -45,6 +45,9 @@ fun SignUpScreen(
     val password = remember {
         mutableStateOf("")
     }
+    val confirmPassword = remember {
+        mutableStateOf("")
+    }
     val imageLogo = "https://pfst.cf2.poecdn.net/base/image/3565901aa1ae3a75945d642b6710c3549ee1cee21f505f8ce86cfa4ccc27818f"
 
     Column(
@@ -92,8 +95,14 @@ fun SignUpScreen(
         Spacer(modifier = Modifier.height(20.dp))
         TextField(
             textStyle = MaterialTheme.typography.titleMedium,
-            value = "Confirm password",
-            onValueChange = {  }
+            value = confirmPassword.value,
+            placeholder = {
+                Text(
+                    text = "Confirm Password",
+                    style = MaterialTheme.typography.titleMedium
+                )
+            },
+            onValueChange = { confirmPassword.value = it }
         )
         Spacer(modifier = Modifier.height(50.dp))
         Button(

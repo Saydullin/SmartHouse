@@ -1,5 +1,6 @@
 package com.saydullin.smarthouse.data.repository.apartments
 
+import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.toObject
 import com.saydullin.smarthouse.data.model.ApartmentFavourite
@@ -23,6 +24,7 @@ class ApartmentsRepositoryImpl : ApartmentsRepository {
                 .addOnSuccessListener { documents ->
                     for (document in documents) {
                         val apartment = document.toObject<Apartment>()
+                        Log.e("sady", "apartment images: ${apartment.images}")
                         apartmentsList.add(apartment)
                     }
                     deferred.complete(

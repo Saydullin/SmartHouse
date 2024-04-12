@@ -34,11 +34,13 @@ import com.saydullin.smarthouse.presentation.screen.profile.ProfileScreen
 import com.saydullin.smarthouse.presentation.utils.ErrorMessage
 import com.saydullin.smarthouse.presentation.viewmodel.ApartmentViewModel
 import com.saydullin.smarthouse.presentation.viewmodel.AuthViewModel
+import com.saydullin.smarthouse.presentation.viewmodel.ProfileViewModel
 
 @Composable
 fun NavController(
     authViewModel: AuthViewModel = hiltViewModel(),
     apartmentViewModel: ApartmentViewModel = hiltViewModel(),
+    profileViewModel: ProfileViewModel = hiltViewModel(),
 ) {
 
     val auth = Firebase.auth
@@ -137,6 +139,7 @@ fun NavController(
                 ProfileScreen(
                     navController = navController,
                     authViewModel = authViewModel,
+                    profileViewModel = profileViewModel,
                 )
             }
             composable(Screen.SignUp.route) {

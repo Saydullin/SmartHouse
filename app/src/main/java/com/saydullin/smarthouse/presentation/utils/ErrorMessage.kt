@@ -37,6 +37,9 @@ class ErrorMessage {
                 StatusCode.ERROR_WEAK_PASSWORD -> {
                     context.getString(R.string.error_weak_password)
                 }
+                StatusCode.USER_NOT_AUTHENTICATED -> {
+                    context.getString(R.string.error_weak_password)
+                }
                 else -> {
                     context.getString(R.string.error_unknown_error)
                 }

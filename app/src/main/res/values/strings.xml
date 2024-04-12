@@ -9,6 +9,7 @@
     <string name="error_invalid_credential">Введены неверные данные</string>
     <string name="error_invalid_email">Неверный email</string>
     <string name="error_weak_password">Слишком слабый пароль</string>
+    <string name="user_not_authenticated">Пользователь не авторизован</string>
     <string name="error_invalid_user_token">Формат токена неверный</string>
     <string name="error_user_token_expired">Срок токена истек. Возможно, данные авторизации были изменены на другом устройстве</string>
 </resources>

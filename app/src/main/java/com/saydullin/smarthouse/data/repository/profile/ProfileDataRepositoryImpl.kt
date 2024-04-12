@@ -25,7 +25,6 @@ class ProfileDataRepositoryImpl : ProfileRepository {
         val document = user.get().await()
         val userData = document.toObject<UserData>()
         return Resource.Success(userData)
-
     }
 
     override suspend fun saveUserData(userData: UserData): Resource<Unit> {
@@ -37,6 +36,26 @@ class ProfileDataRepositoryImpl : ProfileRepository {
             )
         return try {
             db.collection("users").document(uid).set(userData)
+
+            Resource.Success(Unit)
+        } catch (e: Exception) {
+            e.printStackTrace()
+
+            Resource.Error(
+                statusCode = StatusCode.SERVER_ERROR
+            )
+        }
+    }
+
+    override suspend fun dropUserData(): Resource<Unit> {
+        val uid = Firebase.auth.currentUser?.uid
+
+        if (uid.isNullOrEmpty())
+            return Resource.Error(
+                statusCode = StatusCode.USER_NOT_AUTHENTICATED
+            )
+        return try {
+            db.collection("users").document(uid).delete()
 
             Resource.Success(Unit)
         } catch (e: Exception) {

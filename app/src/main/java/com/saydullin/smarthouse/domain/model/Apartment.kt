@@ -7,7 +7,7 @@ data class Apartment @JvmOverloads constructor(
     val title: String = "",
     val description: String = "",
     val previewImage: String = "",
-    val images: List<Int> = listOf(),
+    val images: List<String> = listOf(),
     val views: Int = 0,
     val likes: Int = 0,
     val publishedDate: Long = 0,

@@ -1,4 +1,4 @@
-package com.saydullin.smarthouse.presentation.component
+package com.saydullin.smarthouse.presentation.screen.apartment
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
