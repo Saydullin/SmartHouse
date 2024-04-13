@@ -12,20 +12,16 @@ import androidx.compose.ui.Modifier
 
 @Composable
 fun RateStar(
-    onClick: (isSelected: Boolean) -> Unit
+    isSelectedStar: Boolean = false,
+    onClick: () -> Unit
 ) {
-
-    val isSelected = remember { mutableStateOf(false) }
 
     Icon(
         modifier = Modifier
-            .clickable {
-                onClick(!isSelected.value)
-                isSelected.value = !isSelected.value
-            },
+            .clickable { onClick() },
         imageVector = Icons.Default.Star,
         contentDescription = "Star",
-        tint = if (isSelected.value) {
+        tint = if (isSelectedStar) {
             MaterialTheme.colorScheme.primary
         } else {
             MaterialTheme.colorScheme.onSurface
@@ -33,3 +29,5 @@ fun RateStar(
     )
 
 }
+
+

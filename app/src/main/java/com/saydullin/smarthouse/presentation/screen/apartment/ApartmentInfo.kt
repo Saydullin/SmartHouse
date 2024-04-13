@@ -1,6 +1,5 @@
 package com.saydullin.smarthouse.presentation.screen.apartment
 
-import androidx.compose.animation.core.withInfiniteAnimationFrameNanos
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -28,6 +27,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberAsyncImagePainter
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
+import com.saydullin.smarthouse.domain.model.ApartmentUserRate
 import com.saydullin.smarthouse.presentation.component.rate.RateView
 import com.saydullin.smarthouse.presentation.viewmodel.ApartmentViewModel
 
@@ -37,9 +39,10 @@ fun ApartmentInfo(
     apartmentViewModel: ApartmentViewModel = hiltViewModel()
 ) {
 
+    val user = Firebase.auth.currentUser
     val apartment = apartmentViewModel.currentApartment.value
 
-    if (apartment == null) {
+    if (apartment == null || user == null) {
         Box(modifier = Modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
@@ -97,7 +100,17 @@ fun ApartmentInfo(
         Spacer(modifier = Modifier.height(50.dp))
         RateView(
             modifier = Modifier
-                .padding(horizontal = (18 * 2).dp)
+                .padding(horizontal = 18.dp),
+            onRate = { starCount, message ->
+                apartmentViewModel.rateApartment(
+                    ApartmentUserRate.getRate(
+                        apartmentId = apartment.id,
+                        authorUID = user.uid,
+                        starCount = starCount,
+                        message = message,
+                    )
+                )
+            }
         )
     }
 
